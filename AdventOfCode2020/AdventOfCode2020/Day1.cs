@@ -21,7 +21,7 @@ namespace AdventOfCode2020
             {
                 for(int j = i + 1; j < n.Length; ++j)
                 {
-                    if (n[j] == 2020 - n[i])
+                    if (n[i] + n[j] == 2020)
                     {
                         Console.WriteLine(n[i] * n[j]);
                         Console.Read();
@@ -45,7 +45,7 @@ namespace AdventOfCode2020
                 {
                     for (int k = j + 1; k < n.Length; ++k)
                     {
-                        if (n[k] == 2020 - n[i] - n[j])
+                        if (n[i] + n[j] + n[k] == 2020 )
                         {
                             Console.WriteLine(n[i] * n[j] * n[k]);
                             Console.Read();
