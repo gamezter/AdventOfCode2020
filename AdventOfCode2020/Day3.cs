@@ -25,10 +25,10 @@ namespace AdventOfCode2020
         public static void part2()
         {
             string[] lines = new StreamReader("day3.txt").ReadToEnd().Trim().Split('\n');
-            (int dx, int dy)[] runs = { (1, 1), (3, 1), (5, 1), (7, 1), (1, 2) };
+            (int dx, int dy)[] slopes = { (1, 1), (3, 1), (5, 1), (7, 1), (1, 2) };
             int width = lines[0].Length;
             long total = 1;
-            foreach(var run in runs)
+            foreach(var (dx, dy) in slopes)
             {
                 int x = 0, y = 0;
                 int treeCount = 0;
@@ -36,8 +36,8 @@ namespace AdventOfCode2020
                 {
                     if (lines[y][x] == '#')
                         treeCount++;
-                    x = (x + run.dx) % width;
-                    y += run.dy;
+                    x = (x + dx) % width;
+                    y += dy;
                 }
                 total *= treeCount;
             }
