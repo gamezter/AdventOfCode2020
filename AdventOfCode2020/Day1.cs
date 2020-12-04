@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AdventOfCode2020
 {
@@ -45,7 +42,7 @@ namespace AdventOfCode2020
                 {
                     for (int k = j + 1; k < n.Length; ++k)
                     {
-                        if (n[i] + n[j] + n[k] == 2020 )
+                        if (n[i] + n[j] + n[k] == 2020)
                         {
                             Console.WriteLine(n[i] * n[j] * n[k]);
                             Console.Read();
