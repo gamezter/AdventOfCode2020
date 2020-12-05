@@ -17,21 +17,14 @@ namespace AdventOfCode2020
 
             foreach(var pass in passes)
             {
-                int row = 0;
-                for(int i = 0; i < 7; ++i)
+                int id = 0;
+                for(int i = 0; i < pass.Length; ++i)
                 {
-                    if (pass[i] == 'B')
-                        row += 1 << (6 - i);
+                    if (pass[i] == 'B' || pass[i] == 'R')
+                        id += 1 << (9 - i);
                 }
-                int column = 0;
-                for(int i = 0; i < 3; ++i)
-                {
-                    if (pass[i + 7] == 'R')
-                        column += 1 << (2 - i);
-                }
-
-                if (row * 8 + column > highest)
-                    highest = row * 8 + column;
+                if (id > highest)
+                    highest = id;
             }
 
             Console.Write(highest);
@@ -46,28 +39,22 @@ namespace AdventOfCode2020
 
             foreach (var pass in passes)
             {
-                int row = 0;
-                for (int i = 0; i < 7; ++i)
+                int id = 0;
+                for (int i = 0; i < pass.Length; ++i)
                 {
-                    if (pass[i] == 'B')
-                        row += 1 << (6 - i);
+                    if (pass[i] == 'B' || pass[i] == 'R')
+                        id += 1 << (9 - i);
                 }
-                int column = 0;
-                for (int i = 0; i < 3; ++i)
-                {
-                    if (pass[i + 7] == 'R')
-                        column += 1 << (2 - i);
-                }
-                ids.Add(row * 8 + column);
+                ids.Add(id);
             }
 
             ids.Sort();
 
-            int id = ids[0];
+            int start = ids[0];
 
             for(int i = 0; i < ids.Count; i++)
             {
-                if(ids[i] != id++)
+                if(ids[i] != start++)
                 {
                     Console.WriteLine(ids[i] - 1);
                     Console.Read();
