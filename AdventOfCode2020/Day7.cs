@@ -13,7 +13,7 @@ namespace AdventOfCode2020
         public static void part1()
         {
             string[] rules = new StreamReader("day7.txt").ReadToEnd().Trim().Split('\n');
-            Regex r = new Regex(@"(?<container>\w+ \w+) bags contain ((?<count0>\d) (?<containee0>\w+ \w+) bags?(\.|,))+( (?<count1>\d) (?<containee1>\w+ \w+) bags?(\.|,))?( (?<count2>\d) (?<containee2>\w+ \w+) bags?(\.|,))?( (?<count3>\d) (?<containee3>\w+ \w+) bags?(\.|,))?");
+            Regex r = new Regex(@"(?<container>\w+ \w+) bags contain ((?<count0>\d) (?<containee0>\w+ \w+) bags?(\.|,))?( (?<count1>\d) (?<containee1>\w+ \w+) bags?(\.|,))?( (?<count2>\d) (?<containee2>\w+ \w+) bags?(\.|,))?( (?<count3>\d) (?<containee3>\w+ \w+) bags?(\.|,))?");
 
             Dictionary<string, List<string>> isIn = new Dictionary<string, List<string>>();
 
@@ -26,7 +26,7 @@ namespace AdventOfCode2020
                     if (isIn.TryGetValue(m.Groups["containee0"].Value, out List<string> parents))
                         parents.Add(container);
                     else
-                        isIn.Add(m.Groups["containee0"].Value, new List<string>{ container});
+                        isIn.Add(m.Groups["containee0"].Value, new List<string>{ container });
                 }
                     
                 if (int.TryParse(m.Groups["count1"].Value, out int count1))
