@@ -80,31 +80,43 @@ namespace AdventOfCode2020
             string[] rules = new StreamReader("day7.txt").ReadToEnd().Trim().Split('\n');
             Regex r = new Regex(@"(?<container>\w+ \w+) bags contain ((?<count0>\d) (?<containee0>\w+ \w+) bags?(\.|,))?( (?<count1>\d) (?<containee1>\w+ \w+) bags?(\.|,))?( (?<count2>\d) (?<containee2>\w+ \w+) bags?(\.|,))?( (?<count3>\d) (?<containee3>\w+ \w+) bags?(\.|,))?");
 
-            Dictionary<string, List<(int, string)>> contains = new Dictionary<string, List<(int, string)>>();
+            Dictionary<string, List<string>> contains = new Dictionary<string, List<string>>();
 
             foreach (var rule in rules)
             {
                 Match m = r.Match(rule);
                 string container = m.Groups["container"].Value;
-                List<(int, string)> containees = new List<(int, string)>();
+                List<string> containees = new List<string>();
                 if (int.TryParse(m.Groups["count0"].Value, out int count0))
                 {
-                    containees.Add((count0, m.Groups["containee0"].Value));
+                    for(int i = 0; i < count0; ++i)
+                    {
+                        containees.Add(m.Groups["containee0"].Value);
+                    }
                 }
 
                 if (int.TryParse(m.Groups["count1"].Value, out int count1))
                 {
-                    containees.Add((count1, m.Groups["containee1"].Value));
+                    for (int i = 0; i < count1; ++i)
+                    {
+                        containees.Add(m.Groups["containee1"].Value);
+                    }
                 }
 
                 if (int.TryParse(m.Groups["count2"].Value, out int count2))
                 {
-                    containees.Add((count2, m.Groups["containee2"].Value));
+                    for (int i = 0; i < count2; ++i)
+                    {
+                        containees.Add(m.Groups["containee2"].Value);
+                    }
                 }
 
                 if (int.TryParse(m.Groups["count3"].Value, out int count3))
                 {
-                    containees.Add((count3, m.Groups["containee3"].Value));
+                    for (int i = 0; i < count3; ++i)
+                    {
+                        containees.Add(m.Groups["containee3"].Value);
+                    }
                 }
 
                 contains.Add(container, containees);
@@ -115,14 +127,11 @@ namespace AdventOfCode2020
             int count = 0;
             while(bags.Count > 0)
             {
-                string bag = bags.Pop();
-                foreach(var b in contains[bag])
+                List<string> inside = contains[bags.Pop()];
+                foreach(var bag in inside)
                 {
-                    for (int i = 0; i < b.Item1; ++i)
-                    {
-                        bags.Push(b.Item2);
-                        count++;
-                    } 
+                    bags.Push(bag);
+                    count++;
                 }
             }
             Console.Write(count);
