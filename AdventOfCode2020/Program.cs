@@ -5,7 +5,7 @@ namespace AdventOfCode2020
     {
         static void Main(string[] args)
         {
-            Day10.part2();
+            Day11.part2();
         }
     }
 }
