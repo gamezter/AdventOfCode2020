@@ -37,10 +37,7 @@ namespace AdventOfCode2020
                         {
                             int nx = x + dx;
                             int ny = y + dy;
-                            if (nx < 0 || nx >= width || ny < 0 || ny >= height)
-                                continue;
-
-                            if (map[nx, ny] == '#')
+                            if (nx >= 0 && nx < width && ny >= 0 && ny < height && map[nx, ny] == '#')
                                 occupied++;
                         }
 
