@@ -10,14 +10,14 @@ namespace AdventOfCode2020
         {
             string[] input = new StreamReader("day11.txt").ReadToEnd().Trim().Split();
 
-            int width = input[0].Length;
-            int height = input.Length;
+            int width = input[0].Length + 2;
+            int height = input.Length + 2;
             char[,] map = new char[width, height];
-            for(int y = 0; y < height; ++y)
+            for(int y = 1; y < height - 1; ++y)
             {
-                for(int x = 0; x < width; ++x)
+                for (int x = 1; x < width - 1; ++x)
                 {
-                    map[x, y] = input[y][x];
+                    map[x, y] = input[y - 1][x - 1];
                 }
             }
 
@@ -27,17 +27,15 @@ namespace AdventOfCode2020
                 changed = false;
                 char[,] map2 = new char[width, height];
 
-                for (int y = 0; y < height; ++y)
+                for (int y = 1; y < height - 1; ++y)
                 {
-                    for (int x = 0; x < width; ++x)
+                    for (int x = 1; x < width - 1; ++x)
                     {
                         int occupied = 0;
 
                         foreach(var (dx, dy) in offsets)
                         {
-                            int nx = x + dx;
-                            int ny = y + dy;
-                            if (nx >= 0 && nx < width && ny >= 0 && ny < height && map[nx, ny] == '#')
+                            if (map[x + dx, y + dy] == '#')
                                 occupied++;
                         }
 
