@@ -32,22 +32,22 @@ namespace AdventOfCode2020
 
                 for (int y = 0; y < height; ++y)
                 {
-                    int minY = (y == 0) ? 0 : -1;
-                    int maxY = ((y == (height - 1)) ? 0 : 1);
                     for (int x = 0; x < width; ++x)
                     {
-                        int minX = (x == 0) ? 0 : -1;
-                        int maxX = ((x == (width - 1)) ? 0 : 1);
-
                         int occupied = 0;
 
-                        for(int dx = minX; dx <= maxX; ++dx)
+                        for(int dx = -1; dx <= 1; ++dx)
                         {
-                            for(int dy = minY; dy <= maxY; ++dy)
+                            for(int dy = -1; dy <= 1; ++dy)
                             {
                                 if (dx == 0 && dy == 0)
                                     continue;
-                                if (map[x + dx, y + dy] == '#')
+                                int nx = x + dx;
+                                int ny = y + dy;
+                                if (nx < 0 || nx >= width || ny < 0 || ny >= height)
+                                    continue;
+
+                                if (map[nx, ny] == '#')
                                     occupied++;
                             }
                         }
@@ -73,9 +73,9 @@ namespace AdventOfCode2020
             }
 
             int count = 0;
-            for (int y = 0; y < map.GetLength(1); ++y)
+            for (int y = 0; y < height; ++y)
             {
-                for (int x = 0; x < map.GetLength(0); ++x)
+                for (int x = 0; x < width; ++x)
                 {
                     if (map[x, y] == '#')
                         count++;
@@ -158,9 +158,9 @@ namespace AdventOfCode2020
             }
 
             int count = 0;
-            for (int y = 0; y < map.GetLength(1); ++y)
+            for (int y = 0; y < height; ++y)
             {
-                for (int x = 0; x < map.GetLength(0); ++x)
+                for (int x = 0; x < width; ++x)
                 {
                     if (map[x, y] == '#')
                         count++;
