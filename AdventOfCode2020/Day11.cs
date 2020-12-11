@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AdventOfCode2020
 {
     class Day11
     {
+        private static (int dx, int dy)[] offsets = new []{ (-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1) };
         public static void part1()
         {
             string[] input = new StreamReader("day11.txt").ReadToEnd().Trim().Split();
@@ -36,20 +33,15 @@ namespace AdventOfCode2020
                     {
                         int occupied = 0;
 
-                        for(int dx = -1; dx <= 1; ++dx)
+                        foreach(var (dx, dy) in offsets)
                         {
-                            for(int dy = -1; dy <= 1; ++dy)
-                            {
-                                if (dx == 0 && dy == 0)
-                                    continue;
-                                int nx = x + dx;
-                                int ny = y + dy;
-                                if (nx < 0 || nx >= width || ny < 0 || ny >= height)
-                                    continue;
+                            int nx = x + dx;
+                            int ny = y + dy;
+                            if (nx < 0 || nx >= width || ny < 0 || ny >= height)
+                                continue;
 
-                                if (map[nx, ny] == '#')
-                                    occupied++;
-                            }
+                            if (map[nx, ny] == '#')
+                                occupied++;
                         }
 
                         if (occupied == 0 && map[x, y] == 'L')
@@ -113,27 +105,21 @@ namespace AdventOfCode2020
                     {
                         int occupied = 0;
 
-                        for (int dx = -1; dx <= 1; ++dx)
+                        foreach(var (dx, dy) in offsets)
                         {
-                            for (int dy = -1; dy <= 1; ++dy)
+                            int nx = x + dx;
+                            int ny = y + dy;
+                            while (nx >= 0 && nx < width && ny >= 0 && ny < height)
                             {
-                                if (dx == 0 && dy == 0)
-                                    continue;
-
-                                int nx = x + dx;
-                                int ny = y + dy;
-                                while (nx >= 0 && nx < width && ny >= 0 && ny < height)
+                                if (map[nx, ny] == '#')
                                 {
-                                    if (map[nx, ny] == '#')
-                                    {
-                                        occupied++;
-                                        break;
-                                    }
-                                    if (map[nx, ny] == 'L')
-                                        break;
-                                    nx += dx;
-                                    ny += dy;
+                                    occupied++;
+                                    break;
                                 }
+                                if (map[nx, ny] == 'L')
+                                    break;
+                                nx += dx;
+                                ny += dy;
                             }
                         }
 
