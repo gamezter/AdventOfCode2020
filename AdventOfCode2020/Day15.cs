@@ -28,24 +28,24 @@ namespace AdventOfCode2020
         {
             Dictionary<int, int> numbers = new Dictionary<int, int> { { 0, 0 }, { 14, 1 }, { 6, 2 }, { 20, 3 }, { 1, 4 }, { 4, 5 } };
 
-            int last = 0;
+            int number = 0;
             int index = 6;
 
             while (index < 29999999)
             {
-                if(numbers.TryGetValue(last, out int value))
+                if(numbers.TryGetValue(number, out int lastIndex))
                 {
-                    numbers[last] = index;
-                    last = index - value;
+                    numbers[number] = index;
+                    number = index - lastIndex;
                 }
                 else
                 {
-                    numbers[last] = index;
-                    last = 0;
+                    numbers[number] = index;
+                    number = 0;
                 }
                 index++;
             }
-            Console.Write(last);
+            Console.Write(number);
             Console.Read();
         }
     }
