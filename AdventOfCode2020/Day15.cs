@@ -29,21 +29,19 @@ namespace AdventOfCode2020
             Dictionary<int, int> numbers = new Dictionary<int, int> { { 0, 0 }, { 14, 1 }, { 6, 2 }, { 20, 3 }, { 1, 4 }, { 4, 5 } };
 
             int number = 0;
-            int index = 6;
 
-            while (index < 29999999)
+            for(int i = 6; (i + 1) < 30000000; ++i)
             {
                 if(numbers.TryGetValue(number, out int lastIndex))
                 {
-                    numbers[number] = index;
-                    number = index - lastIndex;
+                    numbers[number] = i;
+                    number = i - lastIndex;
                 }
                 else
                 {
-                    numbers[number] = index;
+                    numbers[number] = i;
                     number = 0;
                 }
-                index++;
             }
             Console.Write(number);
             Console.Read();
