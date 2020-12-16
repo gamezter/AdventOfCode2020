@@ -43,6 +43,7 @@ namespace AdventOfCode2020
                     number = 0;
                 }
             }
+
             Console.Write(number);
             Console.Read();
         }
