@@ -82,7 +82,7 @@ namespace AdventOfCode2020
             string[] input = new StreamReader("day17.txt").ReadToEnd().Trim().Split('\n');
             int size = 18;
 
-            char[,,,] map = new char[size, size, size,size];
+            char[,,,] map = new char[size, size, size, size];
 
             for (int y = 5; y < 13; ++y)
             {
