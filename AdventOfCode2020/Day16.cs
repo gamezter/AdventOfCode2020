@@ -84,11 +84,6 @@ namespace AdventOfCode2020
                 skipTicket:;
             }
 
-            foreach(var v in validNumbers)
-            {
-                v.Sort();
-            }
-
             bool[,] grid = new bool[rules.Length, validNumbers.Length];
 
             for(int i = 0; i < rules.Length; ++i)
