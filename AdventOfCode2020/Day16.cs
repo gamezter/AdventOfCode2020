@@ -110,7 +110,7 @@ namespace AdventOfCode2020
             }
 
 
-            // following has been solved by hand
+            // following has been solved by hand, find column that applies to only one rule/row, then remove that row and repeat
             /*
              * 0  | O X O X X O O O X X O O X O O X O O O O
              * 1  | X X O X X X O O X X O O X O X X O X O O
