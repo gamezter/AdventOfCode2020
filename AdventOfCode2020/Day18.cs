@@ -54,8 +54,7 @@ namespace AdventOfCode2020
             foreach(var line in input)
             {
                 int i = 0;
-                long v = solve(line, ref i);
-                sum += v;
+                sum += solve(line, ref i);
             }
 
             Console.Write(sum);
