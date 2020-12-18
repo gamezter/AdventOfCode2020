@@ -32,22 +32,16 @@ namespace AdventOfCode2020
                             add = false;
                             break;
                         case '(':
-                            {
-                                long value = solve(s, ref i);
-                                if (add)
-                                    total += value;
-                                else
-                                    total *= value;
-                            }
+                            if (add)
+                                total += solve(s, ref i);
+                            else
+                                total *= solve(s, ref i);
                             break;
                         default:
-                            {
-                                long value = (c - 48);
-                                if (add)
-                                    total += value;
-                                else
-                                    total *= value;
-                            }
+                            if (add)
+                                total += (c - 48);
+                            else
+                                total *= (c - 48);
                             break;
                     }
                 }
