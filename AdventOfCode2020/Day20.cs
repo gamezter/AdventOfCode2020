@@ -6,10 +6,20 @@ namespace AdventOfCode2020
 {
     class Day20
     {
+        private struct Tile
+        {
+            public int id;
+            public int[] sides;
+            public List<int> neighbors;
+
+            public bool flip;
+            public int rotateCW;
+        }
+
         public static void part1()
         {
             string[] input = new StreamReader("day20.txt").ReadToEnd().Trim().Split(new[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
-            List<(int id, int[] sides, List<int> neighbors)> tiles = new List<(int id, int[] sides, List<int> neighbors)>();
+            List<Tile> tiles = new List<Tile>();
 
             for(int i = 0; i < input.Length; ++i)
             {
@@ -49,7 +59,7 @@ namespace AdventOfCode2020
                         }
                     }
 
-                    tiles.Add((int.Parse(input[i].Substring(5, 4)), sides, new List<int>()));
+                    tiles.Add(new Tile { id = int.Parse(input[i].Substring(5, 4)) , sides = sides, neighbors = new List<int>() });
                 }
             }
 
@@ -79,10 +89,10 @@ namespace AdventOfCode2020
 
             long product = 1;
 
-            foreach(var (id, sides, neighbors) in tiles)
+            foreach(var tile in tiles)
             {
-                if (neighbors.Count == 2)
-                    product *= id;
+                if (tile.neighbors.Count == 2)
+                    product *= tile.id;
             }
 
             Console.Write(product);
