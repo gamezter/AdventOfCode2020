@@ -8,36 +8,33 @@ namespace AdventOfCode2020
     {
         public static void part1()
         {
-            string[] input = new StreamReader("day20.txt").ReadToEnd().Trim().Split(new[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
+            string[] input = new StreamReader("day20.txt").ReadToEnd().Trim().Split('\n');
             List<(int id, int[] sides, List<int> neighbors)> tiles = new List<(int id, int[] sides, List<int> neighbors)>();
 
-            for (int i = 0; i < input.Length; ++i)
+            for (int i = 0; i < input.Length; i += 12)
             {
-                if (input[i][0] == 'T')
+                int[] sides = new int[4];
+                for (int j = 0; j < 10; ++j)
                 {
-                    int[] sides = new int[4];
-                    for (int j = 0; j < 10; ++j)
+                    if (input[i + 1][j] == '#') // top
                     {
-                        if (input[i + 1][j] == '#') // top
-                        {
-                            sides[0] += 1 << (9 - j);
-                        }
-                        if (input[i + 1 + j][9] == '#') // right
-                        {
-                            sides[1] += 1 << (9 - j);
-                        }
-                        if (input[i + 10][j] == '#') // bottom
-                        {
-                            sides[2] += 1 << (9 - j);
-                        }
-                        if (input[i + 1 + j][0] == '#') // left
-                        {
-                            sides[3] += 1 << (9 - j);
-                        }
+                        sides[0] += 1 << (9 - j);
                     }
-
-                    tiles.Add((int.Parse(input[i].Substring(5, 4)), sides, new List<int>()));
+                    if (input[i + 1 + j][9] == '#') // right
+                    {
+                        sides[1] += 1 << (9 - j);
+                    }
+                    if (input[i + 10][j] == '#') // bottom
+                    {
+                        sides[2] += 1 << (9 - j);
+                    }
+                    if (input[i + 1 + j][0] == '#') // left
+                    {
+                        sides[3] += 1 << (9 - j);
+                    }
                 }
+
+                tiles.Add((int.Parse(input[i].Substring(5, 4)), sides, new List<int>()));
             }
 
             for (int i = 0; i < tiles.Count - 1; ++i)
