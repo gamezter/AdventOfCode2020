@@ -79,8 +79,8 @@ namespace AdventOfCode2020
         public static int getReverse(int x) // 10 bit reverse
         {
             x = ((x & 0x01F) << 5) | ((x & 0x3E0) >> 5);
-            x = ((x & 0x63) << 3) | ((x & 0x318) >> 3) | (x & 0x84);
-            x = ((x & 0x129) << 1) | ((x & 0x252) >> 1) | (x & 0x84);
+            x = ((x & 0x063) << 3) | ((x & 0x318) >> 3) | (x & 0x084);
+            x = ((x & 0x129) << 1) | ((x & 0x252) >> 1) | (x & 0x084);
             return x;
         }
     }
