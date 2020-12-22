@@ -108,6 +108,8 @@ namespace AdventOfCode2020
                 int card1 = player1.Dequeue();
                 int card2 = player2.Dequeue();
 
+                int winner;
+
                 if (card1 <= player1.Count && card2 <= player2.Count)
                 {
                     Queue<int> p1 = new Queue<int>();
@@ -122,32 +124,22 @@ namespace AdventOfCode2020
                         p2.Enqueue(h2[i + 1]);
                     }
 
-
-                    int winner = Game(p1, p2);
-
-                    if (winner == 1)
-                    {
-                        player1.Enqueue(card1);
-                        player1.Enqueue(card2);
-                    }
-                    else
-                    {
-                        player2.Enqueue(card2);
-                        player2.Enqueue(card1);
-                    }
+                    winner = Game(p1, p2);
                 }
                 else
                 {
-                    if (card1 > card2)
-                    {
-                        player1.Enqueue(card1);
-                        player1.Enqueue(card2);
-                    }
-                    else
-                    {
-                        player2.Enqueue(card2);
-                        player2.Enqueue(card1);
-                    }
+                    winner = card1 > card2 ? 1 : 2;
+                }
+
+                if (winner == 1)
+                {
+                    player1.Enqueue(card1);
+                    player1.Enqueue(card2);
+                }
+                else
+                {
+                    player2.Enqueue(card2);
+                    player2.Enqueue(card1);
                 }
             }
 
