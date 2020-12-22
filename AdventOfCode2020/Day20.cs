@@ -68,7 +68,7 @@ namespace AdventOfCode2020
 
             foreach(var (id, sides, neighbors) in tiles)
             {
-                if (neighbors.Count == 2)
+                if (neighbors.Count == 2) // corner tile
                     product *= id;
             }
 
@@ -76,7 +76,7 @@ namespace AdventOfCode2020
             Console.Read();
         }
 
-        public static int getReverse(int x)
+        public static int getReverse(int x) // 10 bit reverse
         {
             x = ((x & 0x01F) << 5) | ((x & 0x3E0) >> 5);
             x = ((x & 0x63) << 3) | ((x & 0x318) >> 3) | (x & 0x84);
