@@ -9,7 +9,7 @@ namespace AdventOfCode2020
         public static void part1()
         {
             string[] input = new StreamReader("day20.txt").ReadToEnd().Trim().Split('\n');
-            List<(int id, int[] sides, List<int> neighbors)> tiles = new List<(int id, int[] sides, List<int> neighbors)>();
+            List<(int id, int[] sides, int[] neighbors)> tiles = new List<(int id, int[] sides, int[] neighbors)>();
 
             for (int i = 0; i < input.Length; i += 12)
             {
@@ -34,7 +34,7 @@ namespace AdventOfCode2020
                     }
                 }
 
-                tiles.Add((int.Parse(input[i].Substring(5, 4)), sides, new List<int>()));
+                tiles.Add((int.Parse(input[i].Substring(5, 4)), sides, new int[4]));
             }
 
             for (int i = 0; i < tiles.Count - 1; ++i)
@@ -54,8 +54,8 @@ namespace AdventOfCode2020
                             int otherHash = otherTile.sides[side2];
                             if (hash == otherHash || reverseHash == otherHash)
                             {
-                                currentTile.neighbors.Add(otherTile.id);
-                                otherTile.neighbors.Add(currentTile.id);
+                                currentTile.neighbors[side] = otherTile.id;
+                                otherTile.neighbors[side2] = currentTile.id;
                                 goto nextTile;
                             }
                         }
@@ -66,9 +66,15 @@ namespace AdventOfCode2020
 
             long product = 1;
 
-            foreach(var (id, sides, neighbors) in tiles)
+            foreach (var (id, sides, neighbors) in tiles)
             {
-                if (neighbors.Count == 2) // corner tile
+                int count = 0;
+                for (int i = 0; i < 4; ++i)
+                {
+                    if (neighbors[i] != 0)
+                        count++;
+                }
+                if (count == 2) // corner tile
                     product *= id;
             }
 
