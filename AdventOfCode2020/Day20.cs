@@ -50,12 +50,12 @@ namespace AdventOfCode2020
 
                     for (int side = 0; side < 4; ++side)
                     {
-                        int value = currentTile.sides[side];
-                        int ISide = getInverse(value);
+                        int hash = currentTile.sides[side];
+                        int reverseHash = getReverse(hash);
                         for (int side2 = 0; side2 < 4; ++side2)
                         {
-                            int value2 = otherTile.sides[side2];
-                            if (value == value2 || ISide == value2)
+                            int otherHash = otherTile.sides[side2];
+                            if (hash == otherHash || reverseHash == otherHash)
                             {
                                 currentTile.neighbors.Add(otherTile.id);
                                 otherTile.neighbors.Add(currentTile.id);
@@ -79,7 +79,7 @@ namespace AdventOfCode2020
             Console.Read();
         }
 
-        public static int getInverse(int x)
+        public static int getReverse(int x)
         {
             x = ((x & 0x01F) << 5) | ((x & 0x3E0) >> 5);
             x = ((x & 0x63) << 3) | ((x & 0x318) >> 3) | (x & 0x84);
