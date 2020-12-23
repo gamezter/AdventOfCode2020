@@ -29,13 +29,9 @@ namespace AdventOfCode2020
                 }
                 while (next1 == value || next2 == value || next3 == value);
 
-                int search = numbers[next3];
-                while (search != value)
-                    search = numbers[search];
-
                 numbers[current] = numbers[next3];
-                numbers[next3] = numbers[search];
-                numbers[search] = next1;
+                numbers[next3] = numbers[value];
+                numbers[value] = next1;
 
                 current = numbers[current];
             }
