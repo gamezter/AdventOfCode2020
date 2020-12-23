@@ -13,7 +13,7 @@ namespace AdventOfCode2020
         public static void part1()
         {
             //place rules in Chomsky normal form and hardcode a and b terminals
-            string[] input = new StreamReader("day19.txt").ReadToEnd().Trim().Split('\n');
+            string[] input = new StreamReader("day19.1.txt").ReadToEnd().Trim().Split('\n');
             int[][] rules = new int[137][];
 
             Regex nonTerminals = new Regex(@"(?<index>\d+): (?<r1>\d+) (?<r2>\d+)( \| (?<r3>\d+) (?<r4>\d+))?");
@@ -111,7 +111,7 @@ namespace AdventOfCode2020
         public static void part2()
         {
             //place rules in Chomsky normal form and hardcode a and b terminals
-            string[] input = new StreamReader("day19.txt").ReadToEnd().Trim().Split('\n');
+            string[] input = new StreamReader("day19.2.txt").ReadToEnd().Trim().Split('\n');
             int[][] rules = new int[138][];
 
             Regex nonTerminals = new Regex(@"(?<index>\d+): (?<r1>\d+) (?<r2>\d+)( \| (?<r3>\d+) (?<r4>\d+))?( \| (?<r5>\d+) (?<r6>\d+))?");
@@ -177,26 +177,9 @@ namespace AdventOfCode2020
                         if (rules[l] == null)
                             continue;
 
-                        if (a.Contains(rules[l][0]) && b.Contains(rules[l][1]))
+                        for(int m = 0; m < rules[l].Length; m += 2)
                         {
-                            if (p[i][j] == null)
-                                p[i][j] = new List<int> { l };
-                            else
-                                p[i][j].Add(l);
-                        }
-                        if (rules[l].Length >= 4)
-                        {
-                            if (a.Contains(rules[l][2]) && b.Contains(rules[l][3]))
-                            {
-                                if (p[i][j] == null)
-                                    p[i][j] = new List<int> { l };
-                                else
-                                    p[i][j].Add(l);
-                            }
-                        }
-                        if (rules[l].Length == 6)
-                        {
-                            if (a.Contains(rules[l][4]) && b.Contains(rules[l][5]))
+                            if (a.Contains(rules[l][m]) && b.Contains(rules[l][m + 1]))
                             {
                                 if (p[i][j] == null)
                                     p[i][j] = new List<int> { l };
@@ -207,7 +190,7 @@ namespace AdventOfCode2020
                     }
                 }
 
-                return p[s.Length - 1][0] != null;
+                return p[s.Length - 1][0] != null && p[s.Length - 1][0][0] == 0;
             }
 
 
