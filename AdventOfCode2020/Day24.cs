@@ -14,49 +14,45 @@ namespace AdventOfCode2020
         {
             string[] input = new StreamReader("day24.txt").ReadToEnd().Trim().Split('\n');
 
-            Regex r = new Regex(@"(e|se|sw|w|ne|nw)+");
+            Regex regex = new Regex(@"(e|se|sw|w|ne|nw)+");
 
-            HashSet<(int, int, int)> flipped = new HashSet<(int, int, int)>();
+            HashSet<(int, int)> flipped = new HashSet<(int, int)>();
 
             for (int i = 0; i < input.Length; ++i)
             {
-                var m = r.Match(input[i]);
+                var m = regex.Match(input[i]);
                 var captures = m.Groups[1].Captures;
 
-                int x = 0, y = 0, z = 0;
+                int q = 0, r = 0;
 
                 for (int j = 0; j < captures.Count; ++j) {
                     switch (captures[j].Value)
                     {
                         case "e":
-                            x++;
-                            y--;
+                            q++;
                             break;
                         case "se":
-                            y--;
-                            z++;
+                            r++;
                             break;
                         case "sw":
-                            x--;
-                            z++;
+                            q--;
+                            r++;
                             break;
                         case "w":
-                            x--;
-                            y++;
+                            q--;
                             break;
                         case "ne":
-                            x++;
-                            z--;
+                            q++;
+                            r--;
                             break;
                         case "nw":
-                            y++;
-                            z--;
+                            r--;
                             break;
                     }
                 }
 
-                if (!flipped.Remove((x, y, z)))
-                    flipped.Add((x, y, z));
+                if (!flipped.Remove((q, r)))
+                    flipped.Add((q, r));
             }
 
             Console.Write(flipped.Count);
