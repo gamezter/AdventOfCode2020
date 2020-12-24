@@ -229,17 +229,12 @@ namespace AdventOfCode2020
                         if(r != -1)
                         {
                             if(r == 0)
-                            {
                                 otherTile.flipY();
-                            }
                             else if(r == 1)
-                            {
                                 otherTile.rotCW();
-                            }
                             else if(r == 3)
-                            {
                                 otherTile.rotCCW();
-                            }
+
                             if (otherTile.sides[2] != tile.t.sides[0])
                                 otherTile.flipX();
 
@@ -255,17 +250,11 @@ namespace AdventOfCode2020
                         if (r != -1)
                         {
                             if (r == 0)
-                            {
                                 otherTile.rotCCW();
-                            }
                             else if (r == 1)
-                            {
                                 otherTile.flipX();
-                            }
                             else if (r == 2)
-                            {
                                 otherTile.rotCW();
-                            }
 
                             if (otherTile.sides[3] != tile.t.sides[1])
                                 otherTile.flipY();
@@ -282,17 +271,12 @@ namespace AdventOfCode2020
                         if (r != -1)
                         {
                             if (r == 1)
-                            {
                                 otherTile.rotCCW();
-                            }
                             else if (r == 2)
-                            {
                                 otherTile.flipY();
-                            }
                             else if (r == 3)
-                            {
                                 otherTile.rotCW();
-                            }
+
                             if (otherTile.sides[0] != tile.t.sides[2])
                                 otherTile.flipX();
 
@@ -308,17 +292,12 @@ namespace AdventOfCode2020
                         if (r != -1)
                         {
                             if (r == 0)
-                            {
                                 otherTile.rotCCW();
-                            }
                             else if (r == 2)
-                            {
                                 otherTile.rotCW();
-                            }
                             else if (r == 3)
-                            {
                                 otherTile.flipX();
-                            }
+
                             if (otherTile.sides[1] != tile.t.sides[3])
                                 otherTile.flipY();
 
