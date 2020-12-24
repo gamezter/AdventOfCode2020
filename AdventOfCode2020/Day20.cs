@@ -322,15 +322,61 @@ namespace AdventOfCode2020
                 }
             }
 
-            for (int y = 0; y < 96; ++y)
+            int totalCount = 0;
+
+            for(int y = 0; y < 96; ++y)
             {
-                for (int x = 0; x < 96; ++x)
+                for(int x = 0; x < 96; ++x)
                 {
-                    Console.Write(map[x, y]);
+                    if (map[x, y] == '#')
+                        totalCount++;
                 }
-                Console.WriteLine();
             }
 
+            (int mx, int my)[] monsterKernel = new[] { (1, 0), (19, 1), (14, 1), (13, 1), (8, 1), (7, 1), (2, 1), (1, 1), (0, 1), (18, 2), (15, 2), (12, 2), (9, 2), (6, 2), (3, 2) }; // already flipped
+            int width = 20;
+            int height = 3;
+
+            int count = 0;
+
+            while(count == 0)
+            {
+                for (int y = 0; y < 96 - height; ++y)
+                {
+                    for (int x = 0; x < 96 - width; ++x)
+                    {
+                        foreach (var (mx, my) in monsterKernel)
+                        {
+                            if (map[x + mx, y + my] != '#')
+                            {
+                                goto next;
+                            }
+                        }
+
+                        count++;
+                        next:;
+                    }
+                }
+
+                if(count == 0)
+                {
+                    //rotate
+                    int px = width / 2; // 10
+                    int py = height / 2; // 1
+                    for(int i = 0; i < monsterKernel.Length; ++i)
+                    {
+                        var (mx, my) = monsterKernel[i];
+                        int nx = 2 * py - my;
+                        int ny = mx;
+                        monsterKernel[i] = (nx, ny);
+                    }
+
+                    (width, height) = (height, width);
+                }
+
+            }
+
+            Console.Write(totalCount - count * 15);
             Console.Read();
         }
     }
